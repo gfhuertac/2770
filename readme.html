@@ -68,16 +68,22 @@
 
 <h1>Heroku Deployment</h1>
 <p>
-  Just push the application to heroku.
-  You will want to adjust the config.database.reset_tables setting, as it initializes and resets the database when set to true.
+  Heroku deployment requires adding a postgres database first, and updating a single app config.
   Depending on your database you need to adjust the database connection settings in the config file, see <a href="https://devcenter.heroku.com/articles/nodejs#using-a-postgresql-database">heroku devcenter</a> for details.
   <h3>Typical Deployment Procedure</h3>
   <ol>
-    <li>adjust database connection settings according to your database configuration (see config.coffee)</li>
-    <li>set config.database.reset_tables to true</li>
-    <li>push to heroku, wait for application to start and initialize the database</li>
-    <li>set config.database.reset_tables to false</li>
-    <li>again push to heroku</li>
+    <li>git clone git@github.com:cloudspokes/brivolabs-pi.git</li>
+    <li>cd brivolabs-pi</li>
+    <li>heroku apps:create pi-api-<b>$YOURNAME</b></li>
+    <li>heroku addons:add heroku-postgresql:dev</li>
+    <li>heroku config</li>
+    <li>update src/config.coffee: set database.override_url property with the correct “color” of postgres URL from heroku config (if different!)</li>
+    <li>git commit -a -m “updated database URL”</li>
+    <li>heroku config:set RESET_TABLES=true</li>
+    <li>git push heroku master</li>
+    <li>hit: http://pi-api-<b>$YOURNAME</b>.herokuapp.com/</li>
+    <li>heroku config:unset RESET_TABLES</li>
+    <li>done!</li>
   </ol>
 </p>
 </body>
