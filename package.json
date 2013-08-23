@@ -1,0 +1,19 @@
+{
+  "name": "rest-api-auth",
+  "description": "Generic REST API with OAuth2.0 for CloudSpokes challenge",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm":  "1.2.x"
+  },
+  "dependencies": {
+    "underscore": "1.5.x",
+    "coffee-script": "1.6.x",
+    "restify": "2.6.x",
+    "restify-oauth2": "2.1.x",
+    "pg": "~1.0.0",
+    "orm": "2.1.x",
+    "winston": "0.7.x"
+  }
+}

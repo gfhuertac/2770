@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <meta charset=utf-8 />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+    <title>REST API OAuth2 Readme</title>
+</head>
+<body class="container">
+    
+<h1>General</h1>
+<p>
+  This Application targets the Cloudspokes challenge described <a href="http://www.cloudspokes.com/challenges/2660">here</a>.
+  It utilizes <a href="http://coffeescript.org/">CoffeeScript</a>, a language that compiles into Javascript.
+  The Application provides basic CRUD functionality and OAuth2 authentication. It is using <a href="http://nodejs.org/">node</a> 
+  with <a href="http://mcavage.me/node-restify/">restify</a> and can be easily deployed to <a href="http://heroku.com">heroku</a>.
+</p>
+<p>
+    <a href="https://github.com/dresende/node-orm2">orm2</a> is used for database transactions, 
+    <a href="https://github.com/domenic/restify-oauth2">restify-oauth2</a> provides basic OAuth2 functionality.
+</p>
+<p>
+  If you prefer Javascript over CoffeeScript you can use it aswell.
+  You could for example create a new route "/foo" and create a corresponding "foo-controller.js" in the controllers directory.
+</p>
+<p>
+    You can find a demo video of the application <a href="http://screencast.com/t/40VBwpFz5ij5">here</a> 
+    and a video explaining the basic architecture <a href="http://screencast.com/t/gK19wn3a">here</a>.
+    postman.json provides some sample requests for 
+    <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en">Postman</a>.
+    A demo version of the application has been <a href="http://evening-anchorage-1209.herokuapp.com/">pushed to heroku</a>, 
+    the demo version will wipe the database on each restart.
+</p>
+
+<h1>Configuration</h1>
+<p>
+  All Configuration is bundled in a single file, namely src/config.coffee.
+  This list will explain the various options.
+</p>
+<ul>
+    <li><b>equire_accept_version</b> if set to true the HTTP client is forced to deliver the "Accept-Version" header</li>
+    <li><b>server_name</b> the server name as it is provided to restify</li>
+    <li><b>token_url</b> the path where clients can request a token</li>
+    <li><b>auth_realm</b> the WWW-Authenticate realm send to the clients</li>
+    <li><b>generator</b> default password/token generator</li>
+    <li><b>database</b> all settings related directly to the postgres database
+      <ul>
+          <li><b>user</b> the name of the database user</li>
+          <li><b>password</b> the password of the given user</li>
+          <li><b>host</b> the database server</li>
+          <li><b>port</b> port to use</li>
+          <li><b>override_url</b> this can be set to ignore all above values and use a prepared url to connect, especially useful for heroku</li>
+          <li><b>reset_tables</b> this will reset all required tables (tables are dropped and created afterwards), can be used to initialize the database</li>
+      </ul>    
+    </li>
+</ul>
+
+<h1>Versioning and Routing</h1>
+<p>
+  This application is using restify and thus supports <a href="http://mcavage.me/node-restify/#Routing">route versioning</a>. 
+  The server will report the version of the requested route in each response (see "Version" header). The client should supply an "Accept-Version" header.
+  The version number must comply with <a href="http://semver.org/">semver</a> syntax.
+</p>
+<p>
+  All routes are specified in routes.coffe, each route defines a hashmap with a correspondig controller (a requireJS module), 
+  a version (defaults to 1.0.0) and handlers for at least one HTTP verb.
+  Take a look at the routes.coffe file for examples.
+</p>
+
+<h1>Heroku Deployment</h1>
+<p>
+  Just push the application to heroku.
+  You will want to adjust the config.database.reset_tables setting, as it initializes and resets the database when set to true.
+  Depending on your database you need to adjust the database connection settings in the config file, see <a href="https://devcenter.heroku.com/articles/nodejs#using-a-postgresql-database">heroku devcenter</a> for details.
+  <h3>Typical Deployment Procedure</h3>
+  <ol>
+    <li>adjust database connection settings according to your database configuration (see config.coffee)</li>
+    <li>set config.database.reset_tables to true</li>
+    <li>push to heroku, wait for application to start and initialize the database</li>
+    <li>set config.database.reset_tables to false</li>
+    <li>again push to heroku</li>
+  </ol>
+</p>
+</body>
