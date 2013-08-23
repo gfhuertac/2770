@@ -11,4 +11,4 @@ module.exports =
     host: "localhost"
     name: "restapi"
     override_url:  process.env.HEROKU_POSTGRESQL_NAVY_URL
-    reset_tables: true
+    reset_tables: false
