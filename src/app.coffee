@@ -24,7 +24,7 @@ if config.require_accept_version
       next(req)
 
 server.use err, req, res, next ->
-  code = err.statusCode
+  code = err.statusCode || 500
   message = err.message
   res.writeHead(code, message, {'content-type' : 'text/plain'});
   res.end(message);
