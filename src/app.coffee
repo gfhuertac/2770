@@ -16,7 +16,7 @@ server.use restify.authorizationParser()
 server.use restify.bodyParser()
 server.use restify.queryParser()
 
-server.get(/\/demos\/?.*/, restify.serveStatic({ directory: '.' } ) );
+server.get(/\/demos\/?.*/, restify.serveStatic({ directory: './static' } ) );
   
 # require header field "Accept-Version" to be set ?
 if config.require_accept_version
@@ -45,9 +45,6 @@ _.each routes, (details, route) ->
       else
         winston.info "not authorized: #{method.toUpperCase()} #{req.url}"
         res.sendUnauthorized()
-
-process.on 'uncaughtException', (err) ->
-  winston.error "Caught exception: #{err.stack}"
 
 # start the server
 server.listen process.env.PORT ? 3333, ->
