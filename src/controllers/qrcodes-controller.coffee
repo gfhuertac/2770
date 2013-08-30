@@ -13,11 +13,11 @@ module.exports =
   # req must contain a variable called data containing string that will be used for the QR code
   generate: (req, res, next) ->
     try
-      data = req.params.data
+      data = req.query.data || req.params.data
       # Check that data exists in the request
       unless data
         error = new Error("Data cannot be empty")
-        res.statusCode = 400
+        error.statusCode = 400
         winston.error error
         next error
         return false
@@ -34,7 +34,7 @@ module.exports =
         correct = "minimum"
       else
         error = new Error("Data is too large to create a QR code")
-        res.statusCode = 400
+        error.statusCode = 400
         winston.error error
         next error
         return false
@@ -42,7 +42,6 @@ module.exports =
       QrCodeGenerator.draw data, correct, (error,canvas) =>
         canvas.toBuffer (err, buf) => 
           if error
-            res.statusCode = 500
             winston.error error
             next error
             return false
@@ -60,7 +59,6 @@ module.exports =
               params.ACL = 'public-read'
             s3.client.putObject params, (error, result) =>
               if error
-                res.statusCode = 500;
                 winston.error error
                 next error
                 return false
@@ -79,7 +77,6 @@ module.exports =
               true
           true
     catch error
-      res.statusCode = 500;
       winston.error error
       next error
       return false
