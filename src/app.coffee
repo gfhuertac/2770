@@ -23,15 +23,6 @@ if config.require_accept_version
     else
       next req
 
-server.use err, req, res, next ->
-  if err
-    code = err.statusCode || 500
-    message = err.message
-    res.writeHead(code, message, {'content-type' : 'text/plain'});
-    res.end(message);
-  else
-    next req
-
 # setup oauth2
 oauth2.ropc server,
   hooks: auth_hooks
