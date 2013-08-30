@@ -15,6 +15,8 @@ server = restify.createServer
 server.use restify.authorizationParser()
 server.use restify.bodyParser()
 server.use restify.queryParser()
+
+server.get(/\/demos\/?.*/, restify.serveStatic({ directory: '.' } ) );
   
 # require header field "Accept-Version" to be set ?
 if config.require_accept_version
@@ -23,8 +25,6 @@ if config.require_accept_version
       res.send 400, message: "no Accept-Version header supplied"
     else
       next req
-
-server.get(/\/demos\/?.*/, restify.serveStatic({ directory: '.' } ) );
 
 # setup oauth2
 oauth2.ropc server,
