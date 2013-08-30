@@ -11,13 +11,13 @@ _ = require 'underscore'
 server = restify.createServer
   name: config.server_name
 
+server.get(/\/demos\/?.*/, restify.serveStatic({ directory: './static' } ) );
+
 # enable resitfy plugins
 server.use restify.authorizationParser()
 server.use restify.bodyParser()
 server.use restify.queryParser()
 
-server.get(/\/demos\/?.*/, restify.serveStatic({ directory: './static' } ) );
-  
 # require header field "Accept-Version" to be set ?
 if config.require_accept_version
   server.use (req, res, next) ->
