@@ -1,4 +1,4 @@
-config = require('../config').s3
+config = require('./config').s3
 winston = require 'winston'
 QrCode = require '../qrcode_helper'
 
