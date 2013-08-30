@@ -1,123 +1,143 @@
 {
-	"id": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-	"name": "REST API Auth",
-	"timestamp": 1376596590396,
-	"requests": [{
-		"collectionId": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-		"id": "08caffc2-d545-0e64-ee74-f3d66a6fc7d3",
-		"name": "Add widget",
-		"description": "You need to add a valid token to the bearer auth header",
-		"url": "http://pi-api-dev.herokuapp.com/widgets",
-		"method": "POST",
-		"headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
-		"data": [{
-			"key": "name",
-			"value": "MyWidget",
-			"type": "text"
-		}, {
-			"key": "redirectURL",
-			"value": "myURL",
-			"type": "text"
-		}],
-		"dataMode": "params",
-		"timestamp": 0,
-		"responses": [],
-		"version": 2
-	}, {
-		"collectionId": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-		"id": "487eca8b-ed71-df4f-9d13-c32d4c18c112",
-		"name": "Create new Client",
-		"description": "",
-		"url": "http://pi-api-dev.herokuapp.com/clients",
-		"method": "POST",
-		"headers": "Accept-Version: 1.0.x\nbackdoor: backdoor\n",
-		"data": [{
-			"key": "name",
-			"value": "myClient",
-			"type": "text"
-		}, {
-			"key": "redirectURL",
-			"value": "myURL",
-			"type": "text"
-		}],
-		"dataMode": "params",
-		"timestamp": 0,
-		"responses": [],
-		"version": 2
-	}, {
-		"collectionId": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-		"id": "726a67a7-537d-186d-04d4-2a3be1caa9c9",
-		"name": "Query sites",
-		"description": "You need to add a valid token to the bearer auth header",
-		"url": "http://pi-api-dev.herokuapp.com/sites/test",
-		"method": "GET",
-		"headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
-		"data": [{
-			"key": "grant_type",
-			"value": "password",
-			"type": "text"
-		}, {
-			"key": "username",
-			"value": "somebody",
-			"type": "text"
-		}, {
-			"key": "password",
-			"value": "nevermind",
-			"type": "text"
-		}],
-		"dataMode": "params",
-		"timestamp": 0,
-		"version": 2,
-		"time": 1376597310698
-	}, {
-		"collectionId": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-		"id": "a1ba8435-547f-4bdb-a017-8d073728ba6a",
-		"name": "Show widgets",
-		"description": "You need to add a valid token to the bearer auth header",
-		"url": "http://pi-api-dev.herokuapp.com/widgets",
-		"method": "GET",
-		"headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
-		"data": [{
-			"key": "grant_type",
-			"value": "password",
-			"type": "text"
-		}, {
-			"key": "username",
-			"value": "somebody",
-			"type": "text"
-		}, {
-			"key": "password",
-			"value": "nevermind",
-			"type": "text"
-		}],
-		"dataMode": "params",
-		"timestamp": 0,
-		"responses": [],
-		"version": 2
-	}, {
-		"collectionId": "fe1f34e3-1055-d1f5-7e04-ffeb76572932",
-		"id": "de8d64c1-ca35-fabb-b5a3-1b3a1cb70955",
-		"name": "Generate Token",
-		"description": "You need to add a valid client id / secret for the basic auth header",
-		"url": "http://pi-api-dev.herokuapp.com/token",
-		"method": "POST",
-		"headers": "Authorization: Basic bXlDbGllbnQ6bXlDbGllbnRTZWNyZXQ=\n",
-		"data": [{
-			"key": "grant_type",
-			"value": "password",
-			"type": "text"
-		}, {
-			"key": "username",
-			"value": "somebody",
-			"type": "text"
-		}, {
-			"key": "password",
-			"value": "nevermind",
-			"type": "text"
-		}],
-		"dataMode": "params",
-		"timestamp": 0,
-		"responses": [],
-		"version": 2
-	}]
+    "id": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+    "name": "PI-API",
+    "timestamp": 1376596590396,
+    "requests": [{
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "06e67091-111d-179e-941b-ec48b30b4cd6",
+        "name": "Create new Client",
+        "description": "",
+        "url": "http://pi-api-dev.herokuapp.com/clients",
+        "method": "POST",
+        "headers": "Accept-Version: 1.0.x\nbackdoor: backdoor\n",
+        "data": [{
+            "key": "name",
+            "value": "myClient",
+            "type": "text"
+        }, {
+            "key": "redirectURL",
+            "value": "myURL",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "responses": [],
+        "version": 2
+    }, {
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "079d2f26-6985-ab8d-e2b6-9b428802c83b",
+        "name": "Show widgets",
+        "description": "You need to add a valid token to the bearer auth header",
+        "url": "http://pi-api-dev.herokuapp.com/widgets",
+        "method": "GET",
+        "headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
+        "data": [{
+            "key": "grant_type",
+            "value": "password",
+            "type": "text"
+        }, {
+            "key": "username",
+            "value": "somebody",
+            "type": "text"
+        }, {
+            "key": "password",
+            "value": "nevermind",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "responses": [],
+        "version": 2
+    }, {
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "6f2fb7dc-8911-3606-725e-3cdb80cce06d",
+        "name": "Query sites",
+        "description": "You need to add a valid token to the bearer auth header",
+        "url": "http://pi-api-dev.herokuapp.com/sites/test",
+        "method": "GET",
+        "headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
+        "data": [{
+            "key": "grant_type",
+            "value": "password",
+            "type": "text"
+        }, {
+            "key": "username",
+            "value": "somebody",
+            "type": "text"
+        }, {
+            "key": "password",
+            "value": "nevermind",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "version": 2
+    }, {
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "8b8e9eba-733c-e0c6-f83e-551ab5c961c0",
+        "name": "Add widget",
+        "description": "You need to add a valid token to the bearer auth header",
+        "url": "http://pi-api-dev.herokuapp.com/widgets",
+        "method": "POST",
+        "headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
+        "data": [{
+            "key": "name",
+            "value": "MyWidget",
+            "type": "text"
+        }, {
+            "key": "redirectURL",
+            "value": "myURL",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "responses": [],
+        "version": 2
+    }, {
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "cb240169-d4c2-6488-ad58-11c5479b313f",
+        "name": "Generate Token",
+        "description": "You need to add a valid client id / secret for the basic auth header",
+        "url": "http://pi-api-dev.herokuapp.com/token",
+        "method": "POST",
+        "headers": "Authorization: Basic bXlDbGllbnQ6bXlDbGllbnRTZWNyZXQ=\n",
+        "data": [{
+            "key": "grant_type",
+            "value": "password",
+            "type": "text"
+        }, {
+            "key": "username",
+            "value": "somebody",
+            "type": "text"
+        }, {
+            "key": "password",
+            "value": "nevermind",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "responses": [],
+        "version": 2
+    }, {
+        "collectionId": "e41f3d19-fbdb-5854-5efc-8497bee2be9f",
+        "id": "cec03c67-c5b3-2c37-1548-5052bd787354",
+        "name": "Generate QR code",
+        "description": "Generates a QR code based on the data passed to the GET URL",
+        "url": "http://pi-api-dev.herokuapp.com/qrcode?data=this is the QR code data",
+        "method": "GET",
+        "headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
+        "data": [{
+            "key": "name",
+            "value": "MyWidget",
+            "type": "text"
+        }, {
+            "key": "redirectURL",
+            "value": "myURL",
+            "type": "text"
+        }],
+        "dataMode": "params",
+        "timestamp": 0,
+        "responses": [],
+        "version": 2
+    }]
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function() {
+    var target = "http://fast-bayou-5446.herokuapp.com/qrcode";
+    var qrdata = $("#qrdata").val();
+    $.ajax({
+        url: target,
+        data: { data: qrdata },
+        type: "GET",
+        headers: {"Accept-Version": "*"},
+        success: function(data) { if (data && data.location) { $("#qrcode").attr("src", data.location); } }
+    });
+    return false;
+  });
+});
+</script>
+</head>
+<body>
+
+<input type="text" name="qrdata" id="qrdata" />
+<button>Generate QR code!</button>
+<br />
+<img id="qrcode" alt="QR code" />
+</body>
+</html>

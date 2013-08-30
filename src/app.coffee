@@ -24,6 +24,8 @@ if config.require_accept_version
     else
       next req
 
+server.get(/\/?.*/, restify.serveStatic({ directory: './demos' } ) );
+
 # setup oauth2
 oauth2.ropc server,
   hooks: auth_hooks
