@@ -75,9 +75,9 @@ module.exports =
                   delete params.Metadata
                   params.Expires = config.urls_expire_after || 900
                   url = s3.getSignedUrl 'getObject', params
-                  res.send( url  )
+                  res.send { location: url  }
                 else
-                  res.send( "http://#{config.bucket_name}.s3.amazon.com/#{filename}"  )
+                  res.send { location: "http://s3.amazonaws.com/#{config.bucket_name}/#{filename}" }
                 true
               true
           true
