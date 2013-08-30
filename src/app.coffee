@@ -8,7 +8,7 @@ db = require './db'
 _ = require 'underscore'
 fs = require 'fs'
 
-qrcode = fs.readFileSync './static/demos/qrcode.html'
+qrcode = fs.readFileSync 'static/demos/qrcode.html'
 
 # configure the server
 server = restify.createServer
