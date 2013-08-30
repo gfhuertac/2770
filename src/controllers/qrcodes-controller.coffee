@@ -10,6 +10,7 @@ module.exports =
   # req must contain a variable called data containing string that will be used for the QR code
   generate: (req, res, next) ->
     try
+      data = req.params.data
       # QR code generation
       qrcode.generate req.params, (error, buf) => 
         if error # there was an error creating the QR code
@@ -26,7 +27,7 @@ module.exports =
           Body: buf
           ContentLength: buf.length
           Metadata:
-            Content: req.params.data
+            Content: data
             
         # AWS S3 upload
         aws.upload params, (error, url) =>
