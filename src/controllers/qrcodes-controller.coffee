@@ -39,7 +39,7 @@ module.exports =
         next error
         return false
   
-      QrCodeGenerator.draw data, correct, (error,canvas) =>
+      QrCode.draw data, correct, (error,canvas) =>
         if error
           winston.error error
           next error
