@@ -3,7 +3,7 @@ winston = require 'winston'
 QrCode = require '../qrcode_helper'
 
 module.exports =
-  generate: (params, callback)
+  generate: (params, callback) ->
     data = params.data
 
     # Check that data exists in the request

@@ -6,7 +6,7 @@ AWS = require 'aws-sdk'
 AWS.config.update({ accessKeyId: config.access_key_id, secretAccessKey: config.secret_access_key });
 
 module.exports =
-  upload: (params, callback)
+  upload: (params, callback) ->
     unless config.use_private_urls # we want to use public URLs therefore ...
       params.ACL = 'public-read' # ... set the object to be publicly available
       
