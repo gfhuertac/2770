@@ -8,10 +8,6 @@ db = require './db'
 _ = require 'underscore'
 fs = require 'fs'
 
-files = fs.readdirSync './'
-for  i of files
-  console.log 'Model Loaded: ' + files[i]
-
 qrcode = fs.readFileSync 'static/demos/qrcode.html'
 
 # configure the server
