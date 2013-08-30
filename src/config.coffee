@@ -12,3 +12,10 @@ module.exports =
     name: "restapi"
     override_url:  process.env.HEROKU_POSTGRESQL_NAVY_URL
     reset_tables: process.env.RESET_TABLES
+  s3:
+    username: "cs-dev"
+    access_key_id: "AKIAIB5ZGDYW6F4JQ4HA"
+    secret_access_key: "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"
+    bucket_name: "brivolabs-qrcodes"
+    use_private_urls: false # if true then only signed URLs are provided to users
+    urls_expire_after: 3600 # if using private URLs, then those URLs will expired after this amount of seconds

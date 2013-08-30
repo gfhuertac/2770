@@ -14,6 +14,8 @@
     "restify-oauth2": "2.1.x",
     "pg": "~1.0.0",
     "orm": "2.1.x",
-    "winston": "0.7.x"
+    "winston": "0.7.x",
+    "aws-sdk": "1.5.x", 
+    "qrcode": "0.2.x"
   }
 }

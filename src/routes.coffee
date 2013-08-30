@@ -28,3 +28,10 @@ module.exports =
     actions:
       get: 'index'
       post: 'create'
+     
+  # for creating and retrieving QR codes
+  '/qrcode':
+    controller: 'qrcodes-controller'
+    public: true
+    actions:
+      get: 'generate'
