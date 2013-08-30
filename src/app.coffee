@@ -14,7 +14,7 @@ server = restify.createServer
 server.get(/\/demos\/?.*/, restify.serveStatic({
   directory: "./static",
   default: "index.html"
-});
+}));
   
 # enable resitfy plugins
 server.use restify.authorizationParser()
