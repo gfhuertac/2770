@@ -13,7 +13,7 @@ module.exports =
   # req must contain a variable called data containing string that will be used for the QR code
   generate: (req, res, next) ->
     try
-      data = req.query.data || req.params.data
+      data = req.params.data
       # Check that data exists in the request
       unless data
         error = new Error("Data cannot be empty")

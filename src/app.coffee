@@ -14,6 +14,7 @@ server = restify.createServer
 # enable resitfy plugins
 server.use restify.authorizationParser()
 server.use restify.bodyParser()
+server.use restify.queryParser()
   
 # require header field "Accept-Version" to be set ?
 if config.require_accept_version
