@@ -40,7 +40,12 @@ module.exports =
         return false
   
       QrCodeGenerator.draw data, correct, (error,canvas) =>
-        canvas.toBuffer (err, buf) => 
+        if error
+          winston.error error
+          next error
+          return false
+        
+        canvas.toBuffer (error, buf) => 
           if error
             winston.error error
             next error

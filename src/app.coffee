@@ -21,13 +21,16 @@ if config.require_accept_version
     if req.header('Accept-Version') is undefined and req.url.slice(1) isnt config.token_url
       res.send 400, message: "no Accept-Version header supplied"
     else
-      next(req)
+      next req
 
 server.use err, req, res, next ->
-  code = err.statusCode || 500
-  message = err.message
-  res.writeHead(code, message, {'content-type' : 'text/plain'});
-  res.end(message);
+  if err
+    code = err.statusCode || 500
+    message = err.message
+    res.writeHead(code, message, {'content-type' : 'text/plain'});
+    res.end(message);
+  else
+    next req
 
 # setup oauth2
 oauth2.ropc server,
