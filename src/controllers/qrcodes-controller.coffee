@@ -16,8 +16,8 @@ module.exports =
       data = req.params.data
       # Check that data exists in the request
       unless data
-        var error = new Error("Data cannot be empty");
-        res.statusCode = = 400;
+        error = new Error("Data cannot be empty")
+        res.statusCode = 400
         winston.error error
         next error
         return false
@@ -33,8 +33,8 @@ module.exports =
       else if size < 2953
         correct = "minimum"
       else
-        var error = new Error("Data is too large to create a QR code");
-        res.statusCode = = 400;
+        error = new Error("Data is too large to create a QR code")
+        res.statusCode = 400
         winston.error error
         next error
         return false
@@ -42,7 +42,7 @@ module.exports =
       QrCodeGenerator.draw data, correct, (error,canvas) =>
         canvas.toBuffer (err, buf) => 
           if error
-            res.statusCode = 500;
+            res.statusCode = 500
             winston.error error
             next error
             return false

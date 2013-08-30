@@ -43,6 +43,9 @@ _.each routes, (details, route) ->
         winston.info "not authorized: #{method.toUpperCase()} #{req.url}"
         res.sendUnauthorized()
 
+process.on 'uncaughtException', (err) ->
+  winston.error "Caught exception: #{err.stack}"
+
 # start the server
 server.listen process.env.PORT ? 3333, ->
    winston.info "#{server.name} listening at #{server.url}"
