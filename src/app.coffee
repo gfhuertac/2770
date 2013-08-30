@@ -6,13 +6,19 @@ routes = require './routes'
 auth_hooks = require './auth_hooks'
 db = require './db'
 _ = require 'underscore'
+fs = require 'fs'
+
+qrcode = fs.readFileSync './static/demos/qrcode.html'
 
 # configure the server
 server = restify.createServer
   name: config.server_name
 
-server.get(/\/demos\/?.*/, restify.serveStatic({ directory: './static' } ) );
-
+server.get '/demos/qrcode', (req, res, next) ->
+  res.writeHead 200, {'Content-Type': 'text/plain'}
+  res.end qrcode
+  next()
+  
 # enable resitfy plugins
 server.use restify.authorizationParser()
 server.use restify.bodyParser()
