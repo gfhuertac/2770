@@ -17,6 +17,8 @@
 <p>
     <a href="https://github.com/dresende/node-orm2">orm2</a> is used for database transactions, 
     <a href="https://github.com/domenic/restify-oauth2">restify-oauth2</a> provides basic OAuth2 functionality.
+    <a href="https://github.com/aws/aws-sdk-js">aws-sdk</a>, the official nodejs SDK from Amazon, is used to access their services.
+    <a href="https://github.com/soldair/node-qrcode">qrcode</a> provides the QR coding functionality.
 </p>
 <p>
   If you prefer Javascript over CoffeeScript you can use it aswell.
@@ -25,9 +27,13 @@
 <p>
     You can find a demo video of the application <a href="http://screencast.com/t/40VBwpFz5ij5">here</a> 
     and a video explaining the basic architecture <a href="http://screencast.com/t/gK19wn3a">here</a>.
+    <br />
+    index.html provides a sample for the QR code generation
+    <br />
     postman.json provides some sample requests for 
     <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en">Postman</a>.
-    A demo version of the application has been <a href="http://evening-anchorage-1209.herokuapp.com/">pushed to heroku</a>, 
+    <br />
+    A demo version of the application has been <a href="http://fast-bayou-5446.herokuapp.com/">pushed to heroku</a>, 
     the demo version will wipe the database on each restart.
 </p>
 
@@ -37,11 +43,12 @@
   This list will explain the various options.
 </p>
 <ul>
-    <li><b>equire_accept_version</b> if set to true the HTTP client is forced to deliver the "Accept-Version" header</li>
+    <li><b>require_accept_version</b> if set to true the HTTP client is forced to deliver the "Accept-Version" header</li>
     <li><b>server_name</b> the server name as it is provided to restify</li>
     <li><b>token_url</b> the path where clients can request a token</li>
     <li><b>auth_realm</b> the WWW-Authenticate realm send to the clients</li>
     <li><b>generator</b> default password/token generator</li>
+    <li><b>qr_max_size</b> the max size for the data used to generate a QR code</li>
     <li><b>database</b> all settings related directly to the postgres database
       <ul>
           <li><b>user</b> the name of the database user</li>
@@ -52,6 +59,24 @@
           <li><b>reset_tables</b> this will reset all required tables (tables are dropped and created afterwards), can be used to initialize the database</li>
       </ul>    
     </li>
+    <li><b>s3</b> all settings related directly to the amazon s3 storage service
+      <ul>
+          <li><b>username</b> the name of the s3 user</li>
+          <li><b>access_key_id</b> the given access key id for the s3 user</li>
+          <li><b>secret_access_key</b> the secret access key for the s3 user</li>
+          <li><b>bucket_name</b> the name of the bucket to upload the objects to</li>
+          <li><b>use_private_urls</b> if true then objects will be private and a temporal URL to access them will be generated</li>
+          <li><b>urls_expire_after</b> if using private URLs, this value defined the lifetime of the objects (in seconds)</li>
+      </ul>    
+    </li>
+</ul>
+* To obtain your Amazon credentials:
+<ul>
+    <li>Go to the service page.</li>
+    <li>Hover over "My Account", and click on "Security Credentials".</li>
+    <li>Scroll to the "Access credentials" section.</li>
+    <li>Your access key is listed under "Access Key ID".</li>
+    <li>Click the "Show" link under "Secret Access Key" to show your secret access key</li>
 </ul>
 
 <h1>Versioning and Routing</h1>
@@ -68,13 +93,15 @@
 
 <h1>Heroku Deployment</h1>
 <p>
-  Heroku deployment requires adding a postgres database first, and updating a single app config.
+  For the QR code generation, the deployment at Heroku needs to use a BUILDPACK that supports the cairo package, used to draw the QR canvas.
+  Heroku deployment also requires adding a postgres database first, and updating a single app config.
   Depending on your database you need to adjust the database connection settings in the config file, see <a href="https://devcenter.heroku.com/articles/nodejs#using-a-postgresql-database">heroku devcenter</a> for details.
   <h3>Typical Deployment Procedure</h3>
   <ol>
     <li>git clone git@github.com:cloudspokes/brivolabs-pi.git</li>
     <li>cd brivolabs-pi</li>
     <li>heroku apps:create pi-api-<b>$YOURNAME</b></li>
+    <li>heroku config:add BUILDPACK_URL=git://github.com/mojodna/heroku-buildpack-nodejs.git#cairo</li>
     <li>heroku addons:add heroku-postgresql:dev</li>
     <li>heroku config</li>
     <li>update src/config.coffee: set database.override_url property with the correct “color” of postgres URL from heroku config (if different!)</li>

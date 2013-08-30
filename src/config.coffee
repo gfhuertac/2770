@@ -4,6 +4,7 @@ module.exports =
   token_url: 'token'
   auth_realm: 'Pi API realm'
   generator: -> Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
+  qr_max_size: 150
   database:
     user: "postgres"
     port: "5432"
