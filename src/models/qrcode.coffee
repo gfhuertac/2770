@@ -4,7 +4,7 @@ db = require '../db'
 
 module.exports = db 'qrcode',
   columns:
-    hashcode: String
+    hcode: String
     qrdata: String
     location: String
     until: Number

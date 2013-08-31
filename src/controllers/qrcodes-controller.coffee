@@ -41,9 +41,9 @@ module.exports =
       next error
       return false
     # create hash to identify the data
-    hashcode = "" + crypto.createHash('md5').update(qrdata).digest('hex')
+    hcode = "" + crypto.createHash('md5').update(qrdata).digest('hex')
     # and use it as the filename for the data
-    filename = hashcode + ".png"
+    filename = hcode + ".png"
     console.log "Filename 2 #{filename}"
     # callback usef to return the data
     callback = (error, url) => 
@@ -56,7 +56,7 @@ module.exports =
       if config.s3.use_private_urls
         validity = (new Date()) + ttl * 1000
       QrCode.create {
-        hashcode: hashcode
+        hcode: hcode
         qrdata: qrdata
         location: url
         until: validity
@@ -66,7 +66,7 @@ module.exports =
       res.send { location: url }
     try
       if config.cache_qrcodes
-        QrCode.find {hashcode: hashcode}, 1, (error, qrcodes) =>
+        QrCode.find {hcode: hcode}, 1, (error, qrcodes) =>
           if qrcodes && qrcodes.length == 1
             validity = qrcodes[0].until
             if validity == 0 || validity < (new Date()).getTime()
