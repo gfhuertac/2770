@@ -10,7 +10,7 @@ $(document).ready(function(){
     var qrdata = $("#qrdata").val();
     $.ajax({
         url: target,
-        data: { data: qrdata },
+        data: { qrdata: qrdata },
         type: "GET",
         headers: {"Accept-Version": "*"},
         success: function(data) { if (data && data.location) { $("#qrcode").attr("src", data.location); } }
