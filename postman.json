@@ -123,21 +123,12 @@
         "id": "cec03c67-c5b3-2c37-1548-5052bd787354",
         "name": "Generate QR code",
         "description": "Generates a QR code based on the data passed to the GET URL",
-        "url": "http://pi-api-dev.herokuapp.com/qrcode?data=this is the QR code data",
-        "method": "GET",
-        "headers": "Accept-Version: 1.0.x\nAuthorization: Bearer myToken\n",
-        "data": [{
-            "key": "name",
-            "value": "MyWidget",
-            "type": "text"
-        }, {
-            "key": "redirectURL",
-            "value": "myURL",
-            "type": "text"
-        }],
-        "dataMode": "params",
-        "timestamp": 0,
-        "responses": [],
-        "version": 2
+        "url":"http://fast-bayou-5446.herokuapp.com/qrcode?qrdata=This is a demo qrdata",
+	"method":"GET","headers":"Accept-Version: 1.0.x\n",
+	"data":[],
+	"dataMode":"params",
+	"timestamp":0,
+	"version":2,
+	"time":1377965349668
     }]
 }
