@@ -9,6 +9,7 @@ QrCode = require '../models/qrcode'
 # Module used as a controller for QR codes
 module.exports = 
   generate: (data, filename, callback) ->
+    fname = filename
     # QR code generation
     qrcode.generate data, (error, buf) => 
       if error # there was an error creating the QR code
@@ -18,7 +19,7 @@ module.exports =
       # then we create the params for the object
       params = 
         Bucket: config.s3.bucket_name,
-        Key: filename,
+        Key: fname,
         Body: buf
         ContentLength: buf.length
         Metadata:
