@@ -16,7 +16,6 @@ module.exports =
         callback error, undefined
         return false
       
-      console.log "Filename 2 #{filename}"
       # then we create the params for the object
       params = 
         Bucket: config.s3.bucket_name,
@@ -34,17 +33,18 @@ module.exports =
   # Method used to create a new QR code.
   # req must contain a variable called data containing string that will be used for the QR code
   retrieve: (req, res, next) ->
-    data = req.params.data
+    qrdata = req.params.qrdata
     # Check that data exists in the request
-    unless data
+    unless qrdata
       error = new Error("Data cannot be empty")
       error.statusCode = 400
       next error
       return false
     # create hash to identify the data
-    hashcode = "" + crypto.createHash('md5').update(data).digest('hex')
+    hashcode = "" + crypto.createHash('md5').update(qrdata).digest('hex')
     # and use it as the filename for the data
     filename = hashcode + ".png"
+    console.log "Filename 2 #{filename}"
     # callback usef to return the data
     callback = (error, url) => 
       if error # there was an error uploading the object
@@ -57,7 +57,7 @@ module.exports =
         validity = (new Date()) + ttl * 1000
       QrCode.create {
         hashcode: hashcode
-        data: data
+        qrdata: qrdata
         location: url
         until: validity
       }, (err) ->
@@ -73,9 +73,9 @@ module.exports =
               url = qrcodes[0].location
               res.send { location: url }
               return
-          generate data, filename, callback
+          generate qrdata, filename, callback
       else
-        generate data, filename, callback
+        generate qrdata, filename, callback
     catch error
       winston.error error
       next error
