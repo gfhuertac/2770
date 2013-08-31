@@ -6,28 +6,29 @@ aws = require '../aws_helper'
 
 QrCode = require '../models/qrcode'
 
+generate = (data, filename, callback) ->
+  # QR code generation
+  qrcode.generate data, (error, buf) => 
+    if error # there was an error creating the QR code
+      callback error, undefined
+      return false
+    
+    # then we create the params for the object
+    params = 
+      Bucket: config.s3.bucket_name,
+      Key: filename,
+      Body: buf
+      ContentLength: buf.length
+      Metadata:
+        Content: data
+        
+    # AWS S3 upload
+    aws.upload params, callback
+    true
+  true
+
 # Module used as a controller for QR codes
 module.exports = 
-  generate: (data, filename, callback) ->
-    # QR code generation
-    qrcode.generate data, (error, buf) => 
-      if error # there was an error creating the QR code
-        callback error, undefined
-        return false
-      
-      # then we create the params for the object
-      params = 
-        Bucket: config.s3.bucket_name,
-        Key: filename,
-        Body: buf
-        ContentLength: buf.length
-        Metadata:
-          Content: data
-          
-      # AWS S3 upload
-      aws.upload params, callback
-      true
-    true
 
   # Method used to create a new QR code.
   # req must contain a variable called data containing string that will be used for the QR code
