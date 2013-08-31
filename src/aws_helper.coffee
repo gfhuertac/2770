@@ -30,7 +30,7 @@ module.exports =
             callback undefined, url
         else
           if callback
-            callback undefined, "http://s3.amazonaws.com/#{config.bucket_name}/#{filename}"
+            callback undefined, "http://s3.amazonaws.com/#{config.bucket_name}/#{params.Key}"
         true
       true
     true
