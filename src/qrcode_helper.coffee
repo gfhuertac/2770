@@ -3,9 +3,9 @@ winston = require 'winston'
 QrCode = require 'qrcode'
 
 module.exports =
-  generate: (data, callback) ->
+  generate: (qrdata, callback) ->
     # Check that data exists in the request
-    unless data
+    unless qrdata
       error = new Error("Data cannot be empty")
       error.statusCode = 400
       if callback
@@ -15,7 +15,7 @@ module.exports =
         throw error
 
     # Check that the size of the data is valid
-    size = data.length
+    size = qrdata.length
     max = config.qr_max_size || 2953
     if size > max
       error = new Error("Data length is higher than maximum allowed size")
@@ -38,7 +38,7 @@ module.exports =
       correction = "minimum"
 
     # draw the qr code in a canvas and transforms it to a buffer to send it to the callback
-    QrCode.draw data, correction, (error, canvas) =>
+    QrCode.draw qrdata, correction, (error, canvas) =>
       if error
         if callback
           callback(error, undefined)
