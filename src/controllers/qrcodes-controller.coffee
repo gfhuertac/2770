@@ -12,8 +12,7 @@ module.exports =
     # QR code generation
     qrcode.generate data, (error, buf) => 
       if error # there was an error creating the QR code
-        winston.error error
-        next error
+        callback error, undefined
         return false
       
       # then we create the params for the object
@@ -41,7 +40,7 @@ module.exports =
       next error
       return false
     # create hash to identify the data
-    hashcode = crypto.createHash('md5').update(data).digest('hex')
+    hashcode = "" + crypto.createHash('md5').update(data).digest('hex')
     # and use it as the filename for the data
     filename = hashcode + ".png"
     # callback usef to return the data
