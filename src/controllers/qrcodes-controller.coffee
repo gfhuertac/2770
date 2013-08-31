@@ -42,9 +42,8 @@ module.exports =
       return false
     # create hash to identify the data
     hcode = "" + crypto.createHash('md5').update(qrdata).digest('hex')
-    # and use it as the filename for the data
-    filename = hcode + ".png"
-    console.log "Filename 2 #{filename}"
+
+    console.log "Filename 2 #{hcode}"
     # callback usef to return the data
     callback = (error, url) => 
       if error # there was an error uploading the object
@@ -63,6 +62,7 @@ module.exports =
       }, (err) ->
         if err
           winston.error err
+          return false
       res.send { location: url }
     try
       if config.cache_qrcodes
@@ -73,9 +73,9 @@ module.exports =
               url = qrcodes[0].location
               res.send { location: url }
               return
-          generate qrdata, filename, callback
+          generate qrdata, hcode + ".png", callback
       else
-        generate qrdata, filename, callback
+        generate qrdata, hcode + ".png", callback
     catch error
       winston.error error
       next error
