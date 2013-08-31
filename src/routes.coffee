@@ -34,4 +34,4 @@ module.exports =
     controller: 'qrcodes-controller'
     public: true
     actions:
-      get: 'generate'
+      get: 'retrieve'

@@ -9,7 +9,6 @@ QrCode = require '../models/qrcode'
 # Module used as a controller for QR codes
 module.exports = 
   generate: (data, filename, callback) ->
-    console.log "Filename #{filename}"
     # QR code generation
     qrcode.generate data, (error, buf) => 
       if error # there was an error creating the QR code
@@ -42,8 +41,6 @@ module.exports =
       return false
     # create hash to identify the data
     hcode = "" + crypto.createHash('md5').update(qrdata).digest('hex')
-
-    console.log "Filename 2 #{hcode}"
     # callback usef to return the data
     callback = (error, url) => 
       if error # there was an error uploading the object
