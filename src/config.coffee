@@ -5,6 +5,7 @@ module.exports =
   auth_realm: 'Pi API realm'
   generator: -> Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
   qr_max_size: 150
+  cache_qrcodes: true # if true then cache the results iif the URLs are public
   database:
     user: "postgres"
     port: "5432"
@@ -18,6 +19,6 @@ module.exports =
     access_key_id: "AKIAIB5ZGDYW6F4JQ4HA"
     secret_access_key: "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"
     bucket_name: "brivolabs-qrcodes"
-    use_private_urls: true # if true then only signed URLs are provided to users
+    use_private_urls: false # if true then only signed URLs are provided to users
     urls_expire_after: 3600 # if using private URLs, then those URLs will expired after this amount of seconds
 

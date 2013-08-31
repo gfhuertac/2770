@@ -1,11 +1,9 @@
-config = require('./config').s3
+config = require('./config')
 winston = require 'winston'
 QrCode = require 'qrcode'
 
 module.exports =
-  generate: (params, callback) ->
-    data = params.data
-
+  generate: (data, callback) ->
     # Check that data exists in the request
     unless data
       error = new Error("Data cannot be empty")
