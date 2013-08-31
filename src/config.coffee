@@ -5,7 +5,7 @@ module.exports =
   auth_realm: 'Pi API realm'
   generator: -> Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
   qr_max_size: 150
-  cache_qrcodes: true # if true then cache the results iif the URLs are public
+  cache_qrcodes: true # if true then cache the results
   database:
     user: "postgres"
     port: "5432"

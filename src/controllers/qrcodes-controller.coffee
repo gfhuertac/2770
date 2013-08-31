@@ -50,15 +50,29 @@ module.exports =
         next error
         return false
       else
+        until = 0
+        ttl = config.s3.urls_expire_after || 900
+        if config.s3.use_private_urls
+          until = (new Date()) + ttl * 1000
+        QrCode.create {
+          hashcode: hashcode
+          data: data
+          location: url
+          until: until
+        }, (err) ->
+          if err
+            winston.error err
         res.send { location: url }
     try
-      if config.cache_qrcodes && !config.s3.use_private_urls # cache is only available for public URLs
+      if config.cache_qrcodes
         QrCode.find {hashcode: hashcode}, 1, (error, qrcodes) =>
           if qrcodes && qrcodes.length == 1
-            location = qrcodes[0].location
-            callback undefined, location
-          else
-            generate data, filename, callback
+            until = qrcodes[0].until
+            if until == 0 || until < (new Date()).getTime()
+              url = qrcodes[0].location
+              res.send { location: url }
+              return
+          generate data, filename, callback
       else
         generate data, filename, callback
     catch error

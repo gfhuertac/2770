@@ -7,3 +7,4 @@ module.exports = db 'qrcode',
     hashcode: String
     data: String
     location: String
+    until: Number
